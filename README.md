@@ -42,3 +42,17 @@ kubectl get replicasets
 ```shell
 kubectl port-forward replicasets/goserver 8080:80
 ```
+
+## Deployment
+
+```shell
+kubectl apply -f deployment.yaml 
+```
+
+```shell
+kubectl get deployments
+```
+
+```shell
+kubectl port-forward deployment/goserver 8080:80
+```
