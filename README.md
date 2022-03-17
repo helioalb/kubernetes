@@ -56,3 +56,19 @@ kubectl get deployments
 ```shell
 kubectl port-forward deployment/goserver 8080:80
 ```
+
+## Service
+
+### ClusterIp
+
+```shell
+kubectl apply -f service_cluster_ip.yaml 
+```
+
+```shell
+kubectl get svc
+```
+
+```shell
+kubectl port-forward svc/goserver-service 8080:80
+```
