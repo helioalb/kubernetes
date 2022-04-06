@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goserver
+spec:
+  selector:
+    matchLabels:
+      app: goserver
+  template:
+    metadata:
+      name: goserver
+      labels:
+        app: goserver
+    spec:
+      containers:
+      - name: goserver
+        image: helioalb/hello-go:5.4.1
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          periodSeconds: 3
+          failureThreshold: 1
+          timeoutSeconds: 1
+          successThreshold: 1
+          initialDelaySeconds: 25
+        envFrom:
+          - configMapRef:
+              name: goserver-env
+        volumeMounts:
+          - mountPath: /go/myfamily
+            name: config
+      volumes:
+        - name: config
+          configMap:
+            name: configmap-family
+            items:
+              - key: members
+                path: family.txt
